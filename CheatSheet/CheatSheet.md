@@ -17,7 +17,7 @@ def fibonacci(n):
         dp[i] = dp[i-1] + dp[i-2]
     return dp[n]
 ```
-# 空间优化版本
+### 空间优化版本
 ```
 def fibonacci_optimized(n):
     if n <= 1:
@@ -27,8 +27,8 @@ def fibonacci_optimized(n):
         prev, curr = curr, prev + curr
     return curr
 ```
-2. 经典DP问题模板
-# 01背包问题
+## 2. 经典DP问题模板
+### 01背包问题
 ```
 def knapsack_01(weights, values, capacity):
     n = len(weights)
@@ -40,7 +40,7 @@ def knapsack_01(weights, values, capacity):
             dp[w] = max(dp[w], dp[w-weights[i]] + values[i])
     return dp[capacity]
 ```
-# 完全背包问题
+### 完全背包问题
 ```
 def knapsack_complete(weights, values, capacity):
     n = len(weights)
@@ -52,7 +52,7 @@ def knapsack_complete(weights, values, capacity):
             dp[w] = max(dp[w], dp[w-weights[i]] + values[i])
     return dp[capacity]
 ```
-# 最长公共子序列 (LCS)
+### 最长公共子序列 (LCS)
 ```
 def longest_common_subsequence(text1, text2):
     m, n = len(text1), len(text2)
@@ -66,8 +66,8 @@ def longest_common_subsequence(text1, text2):
                 dp[i][j] = max(dp[i-1][j], dp[i][j-1])
     return dp[m][n]
 ```
-3. 矩阵DP
-# 最小路径和
+## 3. 矩阵DP
+### 最小路径和
 ```
 def min_path_sum(grid):
     m, n = len(grid), len(grid[0])
@@ -87,9 +87,9 @@ def min_path_sum(grid):
 
     return dp[m-1][n-1]
 ```
-二、深度优先搜索 (DFS)
-1. 递归DFS模板
-# 基本递归DFS
+# 二、深度优先搜索 (DFS)
+## 1. 递归DFS模板
+### 基本递归DFS
 ```
 def dfs_recursive(node, visited):
     if node in visited:
@@ -101,7 +101,7 @@ def dfs_recursive(node, visited):
     for neighbor in get_neighbors(node):
         dfs_recursive(neighbor, visited)
 ```
-# 带路径的DFS
+### 带路径的DFS
 ```
 def dfs_with_path(start, target):
     def dfs(node, path, visited):
@@ -120,8 +120,8 @@ def dfs_with_path(start, target):
     dfs(start, [start], set())
     return result
 ```
-2. 迭代DFS模板
-# 使用栈的迭代DFS
+## 2. 迭代DFS模板
+### 使用栈的迭代DFS
 ```
 def dfs_iterative(start):
     visited = set()
@@ -137,15 +137,15 @@ def dfs_iterative(start):
                     stack.append(neighbor)
     return visited
 ```
-3. 常见DFS应用
-# 二叉树的最大深度
+## 3. 常见DFS应用
+### 二叉树的最大深度
 ```
 def max_depth(root):
     if not root:
         return 0
     return 1 + max(max_depth(root.left), max_depth(root.right))
 ```
-# 二叉树的所有路径
+### 二叉树的所有路径
 ```
 def binary_tree_paths(root):
     def dfs(node, path):
@@ -162,8 +162,8 @@ def binary_tree_paths(root):
     dfs(root, [])
     return paths
 ```
-三、广度优先搜索 (BFS)
-1. 基础BFS模板
+# 三、广度优先搜索 (BFS)
+## 1. 基础BFS模板
 ```
 from collections import deque
 
@@ -196,7 +196,8 @@ def bfs(start, target):
 
     return -1  # 未找到
 ```
-# 带路径的BFS
+### 带路径的BFS
+```
 def bfs_with_path(start, target):
     queue = deque([[start]])
     visited = set([start])
@@ -216,8 +217,10 @@ def bfs_with_path(start, target):
                 queue.append(new_path)
 
     return []  # 未找到路径
-2. 层次遍历模板
-# 二叉树层次遍历
+```
+## 2. 层次遍历模板
+### 二叉树层次遍历
+```
 def level_order(root):
     if not root:
         return []
@@ -241,7 +244,9 @@ def level_order(root):
         result.append(level)
 
     return result
-3. 双向BFS（优化版）
+```
+## 3. 双向BFS（优化版）
+```
 def bidirectional_bfs(start, target):
     if start == target:
         return 0
@@ -278,8 +283,10 @@ def expand_queue(queue, visited, other_visited):
                 queue.append(neighbor)
 
     return False
-四、回溯算法 (Backtracking)
-1. 回溯通用模板
+```
+# 四、回溯算法 (Backtracking)
+## 1. 回溯通用模板
+```
 def backtrack_template(choices):
     result = []
 
@@ -300,8 +307,10 @@ def backtrack_template(choices):
 
     backtrack([], choices)
     return result
-2. 具体应用示例
-# 全排列
+```
+## 2. 具体应用示例
+### 全排列
+```
 def permute(nums):
     def backtrack(path):
         if len(path) == len(nums):
@@ -317,8 +326,9 @@ def permute(nums):
     result = []
     backtrack([])
     return result
-
-# 组合问题
+```
+### 组合问题
+```
 def combine(n, k):
     def backtrack(start, path):
         if len(path) == k:
@@ -333,8 +343,9 @@ def combine(n, k):
     result = []
     backtrack(1, [])
     return result
-
-# N皇后问题
+```
+### N皇后问题
+```
 def solve_n_queens(n):
     def is_valid(board, row, col):
         # 检查列
@@ -375,8 +386,10 @@ def solve_n_queens(n):
     board = [['.' for _ in range(n)] for _ in range(n)]
     backtrack(0)
     return result
-3. 剪枝优化
-# 组合总和（可重复使用）
+```
+## 3. 剪枝优化
+### 组合总和（可重复使用）
+```
 def combination_sum(candidates, target):
     def backtrack(start, path, current_sum):
         if current_sum == target:
@@ -397,9 +410,11 @@ def combination_sum(candidates, target):
     candidates.sort()  # 排序以便剪枝
     backtrack(0, [], 0)
     return result
-五、二分查找 (Binary Search)
-1. 基础二分模板
-# 标准二分查找（查找确切值）
+```
+# 五、二分查找 (Binary Search)
+## 1. 基础二分模板
+### 标准二分查找（查找确切值）
+```
 def binary_search(nums, target):
     left, right = 0, len(nums) - 1
 
@@ -414,8 +429,10 @@ def binary_search(nums, target):
             right = mid - 1
 
     return -1  # 未找到
-2. 变种二分查找
-# 查找第一个等于target的位置
+```
+## 2. 变种二分查找
+### 查找第一个等于target的位置
+```
 def first_equal(nums, target):
     left, right = 0, len(nums) - 1
     result = -1
@@ -431,8 +448,9 @@ def first_equal(nums, target):
             left = mid + 1
 
     return result
-
-# 查找最后一个等于target的位置
+```
+### 查找最后一个等于target的位置
+```
 def last_equal(nums, target):
     left, right = 0, len(nums) - 1
     result = -1
@@ -448,8 +466,9 @@ def last_equal(nums, target):
             right = mid - 1
 
     return result
-
-# 查找第一个大于等于target的位置
+```
+### 查找第一个大于等于target的位置
+```
 def first_greater_equal(nums, target):
     left, right = 0, len(nums) - 1
     result = -1
@@ -464,8 +483,9 @@ def first_greater_equal(nums, target):
             left = mid + 1
 
     return result
-
-# 查找最后一个小于等于target的位置
+```
+### 查找最后一个小于等于target的位置
+```
 def last_less_equal(nums, target):
     left, right = 0, len(nums) - 1
     result = -1
@@ -480,8 +500,10 @@ def last_less_equal(nums, target):
             right = mid - 1
 
     return result
-3. 旋转数组中的二分查找
-# 旋转数组中查找最小值
+```
+## 3. 旋转数组中的二分查找
+### 旋转数组中查找最小值
+```
 def find_min_in_rotated(nums):
     left, right = 0, len(nums) - 1
 
@@ -494,8 +516,9 @@ def find_min_in_rotated(nums):
             right = mid
 
     return nums[left]
-
-# 旋转数组中搜索目标值
+```
+### 旋转数组中搜索目标值
+```
 def search_in_rotated(nums, target):
     left, right = 0, len(nums) - 1
 
@@ -518,9 +541,11 @@ def search_in_rotated(nums, target):
                 right = mid - 1
 
     return -1
-六、双指针 (Two Pointers)
-1. 快慢指针
-# 判断链表是否有环
+```
+# 六、双指针 (Two Pointers)
+## 1. 快慢指针
+### 判断链表是否有环
+```
 def has_cycle(head):
     if not head or not head.next:
         return False
@@ -534,8 +559,9 @@ def has_cycle(head):
         fast = fast.next.next
 
     return True
-
-# 找到链表环的入口
+```
+### 找到链表环的入口
+```
 def detect_cycle(head):
     slow = fast = head
 
@@ -553,8 +579,9 @@ def detect_cycle(head):
             return slow
 
     return None
-
-# 找到链表中间节点
+```
+### 找到链表中间节点
+```
 def middle_node(head):
     slow = fast = head
 
@@ -563,8 +590,10 @@ def middle_node(head):
         fast = fast.next.next
 
     return slow
-2. 左右指针
-# 两数之和（有序数组）
+```
+## 2. 左右指针
+### 两数之和（有序数组）
+```
 def two_sum_sorted(nums, target):
     left, right = 0, len(nums) - 1
 
@@ -579,8 +608,9 @@ def two_sum_sorted(nums, target):
             right -= 1
 
     return []
-
-# 三数之和
+```
+### 三数之和
+```
 def three_sum(nums):
     nums.sort()
     result = []
@@ -610,8 +640,9 @@ def three_sum(nums):
                 right -= 1
 
     return result
-
-# 盛最多水的容器
+```
+### 盛最多水的容器
+```
 def max_area(height):
     left, right = 0, len(height) - 1
     max_water = 0
@@ -627,8 +658,10 @@ def max_area(height):
             right -= 1
 
     return max_water
-3. 滑动窗口
-# 最小覆盖子串
+```
+## 3. 滑动窗口
+### 最小覆盖子串
+```
 def min_window(s, t):
     from collections import Counter
 
@@ -665,8 +698,9 @@ def min_window(s, t):
                 window[d] -= 1
 
     return "" if length == float('inf') else s[start:start+length]
-
-# 无重复字符的最长子串
+```
+### 无重复字符的最长子串
+```
 def length_of_longest_substring(s):
     window = set()
     left = right = 0
@@ -682,8 +716,9 @@ def length_of_longest_substring(s):
             left += 1
 
     return max_len
-
-# 滑动窗口最大值
+```
+### 滑动窗口最大值
+```
 def max_sliding_window(nums, k):
     from collections import deque
 
@@ -709,19 +744,22 @@ def max_sliding_window(nums, k):
             result.append(nums[window[0]])
 
     return result
-
-3. 常见算法
-# 最大公约数
+```
+## 3. 常见算法
+### 最大公约数
+```
 def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
-
-# 最小公倍数
+```
+### 最小公倍数
+```
 def lcm(a, b):
     return a * b // gcd(a, b)
-
-# 质数判断
+```
+### 质数判断
+```
 def sieve(limit):
     """埃拉托色尼筛法，返回素数列表"""
     is_prime = [True] * (limit + 1)
@@ -737,8 +775,10 @@ def sieve(limit):
         if is_prime[i]:
             primes.append(i)
     return primes
-一、基础模板
-1. 标准实现
+```
+# 一、基础模板
+## 1. 标准实现
+```
 class UnionFind:
     def __init__(self, n):
         """初始化n个元素的并查集"""
@@ -779,8 +819,10 @@ class UnionFind:
     def get_count(self):
         """返回连通分量个数"""
         return self.count
-2. 简洁版（适合竞赛）
-# 简化版本，不按秩合并
+```
+## 2. 简洁版（适合竞赛）
+### 简化版本，不按秩合并
+```
 class UnionFindSimple:
     def __init__(self, n):
         self.parent = list(range(n))
@@ -800,7 +842,9 @@ class UnionFindSimple:
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
-3. 带权并查集（维护额外信息）
+```
+## 3. 带权并查集（维护额外信息）
+```
 class WeightedUnionFind:
     def __init__(self, n):
         """带权并查集，可以维护节点到根节点的距离"""
@@ -837,7 +881,9 @@ class WeightedUnionFind:
         if self.find(x) != self.find(y):
             return None  # 不在同一集合
         return self.weight[x] - self.weight[y]
-模板1：标准连通性问题
+```
+### 模板1：标准连通性问题
+```
 def solve_with_union_find(n, connections):
     """
     标准连通性问题的解决方案模板
@@ -857,7 +903,9 @@ def solve_with_union_find(n, connections):
         components[root].append(i)
 
     return list(components.values())
-模板2：最小生成树（Kruskal算法）
+```
+### 模板2：最小生成树（Kruskal算法）
+```
 def kruskal(n, edges):
     """
     Kruskal算法求最小生成树
@@ -883,7 +931,9 @@ def kruskal(n, edges):
         return None
 
     return mst_weight, mst_edges
-模板3：判断图是否有环
+```
+### 模板3：判断图是否有环
+```
 def has_cycle(n, edges):
     """判断无向图是否有环"""
     uf = UnionFind(n)
@@ -892,6 +942,6 @@ def has_cycle(n, edges):
         if not uf.union(u, v):
             # 如果u和v已经在同一集合，说明有环
             return True
-
+```
     return False
 
